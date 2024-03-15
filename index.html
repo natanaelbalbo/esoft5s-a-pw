@@ -2,7 +2,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Página do Pokémon Squirtle 2</title>
+    <title>Página do Pokémon Squirtle</title>
     <style>
       /* Reset de estilos para garantir consistência em diferentes navegadores */
       body,
@@ -20,39 +20,34 @@
         padding: 0;
       }
 
+      /* Estilos gerais */
+
+      body {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+        background-color: #f4f4f4;
+      }
+
       main {
-        max-width: 80vw;
-        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
       }
 
       main > section {
         padding: 20px;
       }
 
-      p {
-        margin-bottom: 16px;
-      }
-
-      ul li {
-        margin-left: 20px;
-      }
-
-      body {
-        font-family: 'Arial', sans-serif;
-        line-height: 1.6;
-        color: #333;
-        background-color: #f4f4f4;
-      }
-
-      header {
-        background-color: #007bff;
-        color: #fff;
-        text-align: center;
+      main section,
+      main article {
+        color: black;
+        background-color: #fff;
         padding: 20px;
-      }
-
-      header h1 {
-        font-size: 24px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        width: 80vw;
       }
 
       section h1,
@@ -67,40 +62,67 @@
         margin-bottom: 10px;
       }
 
+      p {
+        margin-bottom: 16px;
+      }
+
+      ul li {
+        list-style-position: inside;
+      }
+
+      /* Header */
+
+      header {
+        background-color: #007bff;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      header h1 {
+        font-size: 24px;
+      }
+
+      /* Lista de navegação */
+
       nav ul {
         list-style: none;
         display: flex;
+        gap: 20px;
         justify-content: center;
         background-color: #343a40;
         padding: 10px;
-        border-radius: 5px;
-        margin: 20px 0;
+        margin-bottom: 20px;
       }
 
       nav a {
         text-decoration: none;
         color: #fff;
         font-weight: bold;
-        margin: 0 15px;
       }
 
-      th {
-        padding: 10px 24px;
+      nav a:hover {
+        color: #ffc107;
       }
 
-      tr {
+      /* Seções */
+
+      #curiosidades li::marker {
+        content: '🔍';
+      }
+
+      #evolucao ul {
+        display: flex;
+        justify-content: space-around;
+        list-style: none;
+      }
+
+      #evolucao figcaption {
+        font-weight: 600;
+        font-size: 20px;
         text-align: center;
-      }
-
-      main section,
-      main article,
-      main table {
-        color: black;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
+        margin-top: 16px;
       }
 
       article {
@@ -108,23 +130,51 @@
         color: #fff;
       }
 
+      /* Links */
+
+      a[target='_blank'] {
+        color: #4592c4;
+        font-weight: bold;
+      }
+
+      a[target='_blank']:hover {
+        opacity: 0.8;
+      }
+
+      /* Footer */
+
       footer {
         background-color: #343a40;
         color: #fff;
         padding: 20px;
         text-align: center;
         bottom: 0;
-        width: 100%;
       }
 
       footer a {
-        color: #ffc107;
         text-decoration: none;
+        transition: color 0.3s ease-in-out;
+      }
+
+      footer a[href*='#'] {
+        color: white;
+      }
+
+      footer a[href*='mailto'] {
+        color: orangered;
+      }
+
+      footer a[href*='tel'] {
+        color: limegreen;
+      }
+
+      footer a[href]:hover {
+        opacity: 0.8;
       }
     </style>
   </head>
   <body>
-    <header>
+    <header id="header">
       <h1>Squirtle</h1>
     </header>
 
@@ -221,29 +271,38 @@
       </section>
 
       <section id="evolucao" aria-labelledby="evolucao-label">
-        <h2 id="evolucao-label">Evolução</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Estágio</th>
-              <th>Pokémon</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Squirtle</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Wartortle</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Blastoise</td>
-            </tr>
-          </tbody>
-        </table>
+        <h2 id="evolucao-label">Evoluções</h2>
+        <ul>
+          <li>
+            <figure>
+              <img
+                src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/007.png"
+                alt="Squirtle"
+              />
+              <figcaption>1. Squirtle</figcaption>
+            </figure>
+          </li>
+
+          <li>
+            <figure>
+              <img
+                src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/008.png"
+                alt="Wartortle"
+              />
+              <figcaption>2. Wartortle</figcaption>
+            </figure>
+          </li>
+
+          <li>
+            <figure>
+              <img
+                src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/009.png"
+                alt="Blastoise"
+              />
+              <figcaption>3. Blastoise</figcaption>
+            </figure>
+          </li>
+        </ul>
       </section>
     </main>
 
@@ -251,7 +310,7 @@
       <p aria-label="Copyright">
         &copy; 2024 Página do Pokémon Squirtle. Todos os direitos reservados.
       </p>
-      <p><a href="#info-squirtle">Voltar para o topo</a></p>
+      <p><a href="#header">Voltar para o topo</a></p>
       <p><a href="mailto:contato@squirtlepage.com">Contato via e-mail</a></p>
       <p><a href="tel:+5555555555">Telefone: (55) 5555-5555</a></p>
     </footer>
