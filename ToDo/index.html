@@ -1,28 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ToDo</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo - Lista de Tarefas</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <header>
-      <h1>ToDo List</h1>   
-   </header>
-
-   <main>
-      <form id="todoForm">
-        <input type="text" id="titleInput" placeholder="Título da Tarefa" required>
-        <textarea id="descriptionInput" placeholder="Descrição da Tarefa" required></textarea>
-        <button type="submit">Adicionar Tarefa</button>
-      </form>   
-      <ul id="taskList"></ul>
-   </main>
-
-   <footer>
-
-   </footer>
+    <div class="container">
+        <header class="o-header">Lista de Tarefas - ToDo</header>
+        <main class="o-main">
+            <form name="meu-form" onsubmit="enviar(event)">
+                <input type="text" name="textinput" placeholder="Informe o titulo da tarefa">
+                <textarea name="tarefadesc" placeholder="Informe a descrição da tarefa"></textarea>
+                <button type="submit">Adicionar Tarefa</button>
+            </form>
+        </main>
+        <footer class="o-footer">&copy ToDo List - 2024</footer>
+    </div>
+    <script src="index.js"></script>
 </body>
 </html>

@@ -1,23 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const todoForm = document.getElementById("todoForm");
-    const titleInput = document.getElementById("titleInput");
-    const descriptionInput = document.getElementById("descriptionInput");
-    const taskList = document.getElementById("taskList");
+window.onload = function() {
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+    const main = document.querySelector('.container');
 
-    todoForm.addEventListener("submit", (event) => {
-        event.preventDefault(); 
+    for (const tarefa of tarefas) {
+        const div = document.createElement('div');
+        div.classList.add('tarefa');
+        div.textContent = `Título: ${tarefa.titulo}, Descrição: ${tarefa.descricao}`;
 
-        const title = titleInput.value;
-        const description = descriptionInput.value;
+        main.appendChild(div);
+    }
+}
 
-        if (title.trim() !== "" && description.trim() !== "") {
-            const task = {
-                title: title,
-                description: description
-            };
+function enviar(e) {
+    e.preventDefault();
 
-            
-            console.log(task); 
-        }
-    });
-});
+    const form = e.target
+    const formData = new FormData(form)
+
+    const titulo = formData.get('textinput');
+    const descricao = formData.get('tarefadesc');
+
+    const tarefa = { titulo, descricao };
+
+    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+    tarefas.push(tarefa); 
+
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+
+    console.log('Tarefa adicionada ao localStorage:', tarefa);
+
+    form.reset();
+
+    window.location.reload();
+    
+}
