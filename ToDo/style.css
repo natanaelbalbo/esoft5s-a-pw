@@ -1,0 +1,20 @@
+body{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    background-color: white;
+    color: white;
+}
+
+header{
+    display: grid;
+    background-color: #333;
+    justify-content: center;
+}
+
+footer{
+    background-color: #333;
+}
+
+main button{
+    background-color: #0074d9;
+}
