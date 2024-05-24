@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo Lists</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
@@ -12,7 +12,7 @@
         <h1>Todo List</h1>
       </header>
       <main>
-        <!-- Formulário para adicionar tarefas -->
+
         <form id="taskForm" onsubmit="addTask(event)">
           <input
             type="text"
@@ -30,11 +30,29 @@
           <button type="submit">Salvar Tarefa</button>
         </form>
 
-        <!-- Lista de tarefas -->
         <ul id="taskList"></ul>
       </main>
       <footer>&copy; 2024 Todo List</footer>
     </div>
+
+    <dialog id="editDialog">
+      <form id="editForm" onsubmit="editTask(event)">
+        <input type="hidden" id="editTaskId" />
+        <input
+          type="text"
+          id="editTitle"
+          required
+          placeholder="Informe o título da tarefa"
+        />
+        <textarea
+          id="editDescription"
+          required
+          placeholder="Informe a descrição da tarefa"
+        ></textarea>
+        <button type="submit">Editar Tarefa</button>
+        <button type="button" onclick="closeEditDialog()">Cancelar</button>
+      </form>
+    </dialog>
 
     <script src="index.js"></script>
   </body>

@@ -1,4 +1,3 @@
-/* Reset de estilos para garantir consistência em diferentes navegadores */
 body,
 h1,
 h2,
@@ -85,9 +84,22 @@ li {
   margin: 8px 0;
   padding: 20px;
   border: solid 1px #ccc;
+  position: relative;
 }
 
 li p {
   white-space: pre-wrap;
   margin-top: 10px;
+}
+
+.editButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #676767;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }

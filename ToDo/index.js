@@ -1,8 +1,7 @@
 const taskKey = '@tasks';
 
-// Função para adicionar tarefa
 function addTask(event) {
-  event.preventDefault(); // Evita o recarregamento da página
+  event.preventDefault(); 
   const taskId = new Date().getTime();
   const taskList = document.querySelector('#taskList');
 
@@ -13,18 +12,15 @@ function addTask(event) {
   const taskDescription = formData.get('description');
 
   const li = document.createElement('li');
-
   li.id = taskId;
   li.innerHTML = `
-      <h2>${taskTitle}</h2>
-      <p>${taskDescription}</p>
-      <button class="editButton" title="Editar tarefa" onclick="openEditDialog(${taskId})">✏️</button>
-      <button class="deleteButton" title="Apagar tarefa" onclick="deleteTask(${taskId})">❌</button>
+    <h2>${taskTitle}</h2>
+    <p>${taskDescription}</p>
+    <button class="editButton" onclick="openEditDialog(${taskId})" title="Editar tarefa">✏️</button>
   `;
 
   taskList.appendChild(li);
 
-  // Salvar tarefas no localStorage
   const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
   tasks.push({ id: taskId, title: taskTitle, description: taskDescription });
   localStorage.setItem(taskKey, JSON.stringify(tasks));
@@ -32,64 +28,57 @@ function addTask(event) {
   form.reset();
 }
 
-// Função para carregar tarefas do localStorage ao recarregar a página
-window.addEventListener('DOMContentLoaded', loadTasks);
-
-function loadTasks() {
+window.addEventListener('DOMContentLoaded', () => {
   const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
   const taskList = document.querySelector('#taskList');
   taskList.innerHTML = tasks
-    .map(task => `
+    .map(
+      (task) => `
       <li id="${task.id}">
         <h2>${task.title}</h2>
         <p>${task.description}</p>
-        <button class="editButton" title="Editar tarefa" onclick="openEditDialog(${task.id})">✏️</button>
-        <button class="deleteButton" title="Apagar tarefa" onclick="deleteTask(${task.id})">❌</button>
-      </li>`)
+        <button class="editButton" onclick="openEditDialog(${task.id})" title="Editar tarefa">✏️</button>
+      </li>
+    `
+    )
     .join('');
-}
+});
 
-// Função para excluir tarefa
-function deleteTask(taskId) {
-  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
-  const filteredTasks = tasks.filter(task => task.id !== taskId);
-  localStorage.setItem(taskKey, JSON.stringify(filteredTasks));
-  document.getElementById(taskId).remove();
-}
-
-// Função para abrir o diálogo de edição
 function openEditDialog(taskId) {
   const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
-  const task = tasks.find(task => task.id === taskId);
+  const task = tasks.find((t) => t.id === taskId);
 
   if (task) {
+    document.querySelector('#editTaskId').value = taskId;
     document.querySelector('#editTitle').value = task.title;
     document.querySelector('#editDescription').value = task.description;
-    document.querySelector('#editForm').dataset.taskId = task.id;
     document.querySelector('#editDialog').showModal();
   }
 }
 
-// Função para fechar o diálogo de edição
 function closeEditDialog() {
   document.querySelector('#editDialog').close();
 }
 
-// Função para editar tarefa
 function editTask(event) {
   event.preventDefault();
-  const form = document.querySelector('#editForm');
-  const taskId = form.dataset.taskId;
-  const taskTitle = form.querySelector('#editTitle').value;
-  const taskDescription = form.querySelector('#editDescription').value;
+
+  const taskId = parseInt(document.querySelector('#editTaskId').value, 10);
+  const taskTitle = document.querySelector('#editTitle').value;
+  const taskDescription = document.querySelector('#editDescription').value;
 
   const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
-  const taskIndex = tasks.findIndex(task => task.id === taskId);
+  const taskIndex = tasks.findIndex((t) => t.id === taskId);
 
   if (taskIndex !== -1) {
-    tasks[taskIndex] = { id: taskId, title: taskTitle, description: taskDescription };
+    tasks[taskIndex].title = taskTitle;
+    tasks[taskIndex].description = taskDescription;
     localStorage.setItem(taskKey, JSON.stringify(tasks));
-    loadTasks();
+
+    const li = document.getElementById(taskId);
+    li.querySelector('h2').textContent = taskTitle;
+    li.querySelector('p').textContent = taskDescription;
+
     closeEditDialog();
   }
 }
