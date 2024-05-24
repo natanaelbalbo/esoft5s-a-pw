@@ -1,23 +1,41 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo - Lista de Tarefas</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo Lists</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="container">
-        <header class="o-header">Lista de Tarefas - ToDo</header>
-        <main class="o-main">
-            <form name="meu-form" onsubmit="enviar(event)">
-                <input type="text" name="textinput" placeholder="Informe o titulo da tarefa">
-                <textarea name="tarefadesc" placeholder="Informe a descrição da tarefa"></textarea>
-                <button type="submit">Adicionar Tarefa</button>
-            </form>
-        </main>
-        <footer class="o-footer">&copy ToDo List - 2024</footer>
+      <header>
+        <h1>Todo List</h1>
+      </header>
+      <main>
+        <!-- Formulário para adicionar tarefas -->
+        <form id="taskForm" onsubmit="addTask(event)">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            placeholder="Informe o título da tarefa"
+          />
+          <textarea
+            id="description"
+            name="description"
+            required
+            placeholder="Informe a descrição da tarefa"
+          ></textarea>
+          <button type="submit">Salvar Tarefa</button>
+        </form>
+
+        <!-- Lista de tarefas -->
+        <ul id="taskList"></ul>
+      </main>
+      <footer>&copy; 2024 Todo List</footer>
     </div>
+
     <script src="index.js"></script>
-</body>
+  </body>
 </html>

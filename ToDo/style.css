@@ -1,69 +1,93 @@
+/* Reset de estilos para garantir consistência em diferentes navegadores */
+body,
+h1,
+h2,
+p,
+ul,
+ol,
+li,
+figure,
+table,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+
 * {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .container {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
 }
 
-.o-header {
-    font-weight: bold;
-    font-size: 40px;
-    color: white;
-    display: flex;
-    background: #333;
-    justify-content: center;
-    padding: 20px;
+header,
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 
-.o-main {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+main {
+  padding: 16px;
 }
 
-.o-footer {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    color: white;
-    background: #333;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+main form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  width: 40ch;
+  margin: 0 auto;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+input,
+textarea::placeholder {
+  font-family: 'Arial', sans-serif;
 }
 
 button {
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
-    background-color: #0074d9;
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-    width: 120px;
-    margin: 0 auto; 
+  background-color: #0074d9;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 15px;
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 80ch;
+  margin: 0 auto;
 }
 
-.tarefa {
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    border: 2px solid #7b7b7b; 
-    border-radius: 5px; 
-    padding: 10px; 
-    margin: 10px 0; 
-    background-color: #f9f9f9; 
-    width: 250px;
-    margin-left: auto;
-    margin-right: auto;
+li {
+  margin: 8px 0;
+  padding: 20px;
+  border: solid 1px #ccc;
+}
+
+li p {
+  white-space: pre-wrap;
+  margin-top: 10px;
 }

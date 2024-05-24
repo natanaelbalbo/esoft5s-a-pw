@@ -1,36 +1,95 @@
-window.onload = function() {
-    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-    const main = document.querySelector('.container');
+const taskKey = '@tasks';
 
-    for (const tarefa of tarefas) {
-        const div = document.createElement('div');
-        div.classList.add('tarefa');
-        div.textContent = `Título: ${tarefa.titulo}, Descrição: ${tarefa.descricao}`;
+// Função para adicionar tarefa
+function addTask(event) {
+  event.preventDefault(); // Evita o recarregamento da página
+  const taskId = new Date().getTime();
+  const taskList = document.querySelector('#taskList');
 
-        main.appendChild(div);
-    }
+  const form = document.querySelector('#taskForm');
+  const formData = new FormData(form);
+
+  const taskTitle = formData.get('title');
+  const taskDescription = formData.get('description');
+
+  const li = document.createElement('li');
+
+  li.id = taskId;
+  li.innerHTML = `
+      <h2>${taskTitle}</h2>
+      <p>${taskDescription}</p>
+      <button class="editButton" title="Editar tarefa" onclick="openEditDialog(${taskId})">✏️</button>
+      <button class="deleteButton" title="Apagar tarefa" onclick="deleteTask(${taskId})">❌</button>
+  `;
+
+  taskList.appendChild(li);
+
+  // Salvar tarefas no localStorage
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+  tasks.push({ id: taskId, title: taskTitle, description: taskDescription });
+  localStorage.setItem(taskKey, JSON.stringify(tasks));
+
+  form.reset();
 }
 
-function enviar(e) {
-    e.preventDefault();
+// Função para carregar tarefas do localStorage ao recarregar a página
+window.addEventListener('DOMContentLoaded', loadTasks);
 
-    const form = e.target
-    const formData = new FormData(form)
+function loadTasks() {
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+  const taskList = document.querySelector('#taskList');
+  taskList.innerHTML = tasks
+    .map(task => `
+      <li id="${task.id}">
+        <h2>${task.title}</h2>
+        <p>${task.description}</p>
+        <button class="editButton" title="Editar tarefa" onclick="openEditDialog(${task.id})">✏️</button>
+        <button class="deleteButton" title="Apagar tarefa" onclick="deleteTask(${task.id})">❌</button>
+      </li>`)
+    .join('');
+}
 
-    const titulo = formData.get('textinput');
-    const descricao = formData.get('tarefadesc');
+// Função para excluir tarefa
+function deleteTask(taskId) {
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+  const filteredTasks = tasks.filter(task => task.id !== taskId);
+  localStorage.setItem(taskKey, JSON.stringify(filteredTasks));
+  document.getElementById(taskId).remove();
+}
 
-    const tarefa = { titulo, descricao };
+// Função para abrir o diálogo de edição
+function openEditDialog(taskId) {
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+  const task = tasks.find(task => task.id === taskId);
 
-    const tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
-    tarefas.push(tarefa); 
+  if (task) {
+    document.querySelector('#editTitle').value = task.title;
+    document.querySelector('#editDescription').value = task.description;
+    document.querySelector('#editForm').dataset.taskId = task.id;
+    document.querySelector('#editDialog').showModal();
+  }
+}
 
-    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+// Função para fechar o diálogo de edição
+function closeEditDialog() {
+  document.querySelector('#editDialog').close();
+}
 
-    console.log('Tarefa adicionada ao localStorage:', tarefa);
+// Função para editar tarefa
+function editTask(event) {
+  event.preventDefault();
+  const form = document.querySelector('#editForm');
+  const taskId = form.dataset.taskId;
+  const taskTitle = form.querySelector('#editTitle').value;
+  const taskDescription = form.querySelector('#editDescription').value;
 
-    form.reset();
+  const tasks = JSON.parse(localStorage.getItem(taskKey)) || [];
+  const taskIndex = tasks.findIndex(task => task.id === taskId);
 
-    window.location.reload();
-    
+  if (taskIndex !== -1) {
+    tasks[taskIndex] = { id: taskId, title: taskTitle, description: taskDescription };
+    localStorage.setItem(taskKey, JSON.stringify(tasks));
+    loadTasks();
+    closeEditDialog();
+  }
 }
