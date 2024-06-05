@@ -1,59 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Todo List</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Todo List</h1>
-      </header>
-      <main>
-
-        <form id="taskForm" onsubmit="addTask(event)">
-          <input
-            type="text"
-            name="title"
-            id="title"
-            required
-            placeholder="Informe o título da tarefa"
-          />
-          <textarea
-            id="description"
-            name="description"
-            required
-            placeholder="Informe a descrição da tarefa"
-          ></textarea>
-          <button type="submit">Salvar Tarefa</button>
-        </form>
-
-        <ul id="taskList"></ul>
-      </main>
-      <footer>&copy; 2024 Todo List</footer>
-    </div>
-
-    <dialog id="editDialog">
-      <form id="editForm" onsubmit="editTask(event)">
-        <input type="hidden" id="editTaskId" />
-        <input
-          type="text"
-          id="editTitle"
-          required
-          placeholder="Informe o título da tarefa"
-        />
-        <textarea
-          id="editDescription"
-          required
-          placeholder="Informe a descrição da tarefa"
-        ></textarea>
-        <button type="submit">Editar Tarefa</button>
-        <button type="button" onclick="closeEditDialog()">Cancelar</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
+    </header>
+    <main>
+      <form id="taskForm" onsubmit="addTask(event)">
+        <input type="text" name="title" id="title" required placeholder="Informe o título da tarefa" />
+        <textarea id="description" name="description" required placeholder="Informe a descrição da tarefa"></textarea>
+        <button type="submit">Salvar Tarefa</button>
       </form>
-    </dialog>
-
-    <script src="index.js"></script>
-  </body>
+      <ul id="taskList"></ul>
+    </main>
+    <footer>&copy; 2024 Todo List</footer>
+  </div>
+  <dialog id="editDialog">
+    <form id="editForm" onsubmit="editTask(event)">
+      <input type="hidden" id="editTaskId" />
+      <input type="text" id="editTitle" required placeholder="Informe o título da tarefa" />
+      <textarea id="editDescription" required placeholder="Informe a descrição da tarefa"></textarea>
+      <button type="submit">Editar Tarefa</button>
+      <button type="button" onclick="closeEditDialog()">Cancelar</button>
+    </form>
+  </dialog>
+  <script src="index.js"></script>
+</body>
 </html>
